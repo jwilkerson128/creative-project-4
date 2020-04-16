@@ -1,7 +1,7 @@
 <template>
 <div>
   <h1>ADMINS ONLY!</h1>
-  <p>Please only delete stories that are inappropriate or offensive</p>
+  <p>Please only delete stories that are inappropriate or offensive.</p>
   <div class="story-gallery">
     <div class="story" v-for="story in completedStories" v-bind:key="story._id">
       <img :src="story.illustration_path">
@@ -47,10 +47,29 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 img {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
+}
+
+.story-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.story {
+  margin: 10px;
+}
+
+button {
+  padding: 1px;
+}
+
+p {
+  text-align: center;
 }
 </style>

@@ -21,3 +21,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+* {
+  padding: 15px;
+}
+
+a {
+  padding: 0px;
+}
+</style>

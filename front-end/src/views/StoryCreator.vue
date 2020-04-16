@@ -13,12 +13,10 @@
   <div v-if="creationMode==='continue'">
     <story-continuer />
   </div>
-  <button @click="submit">Submit</button>
 </div>
 </template>
 
 <script>
-import axios from 'axios';
 import StoryStarter from '@/components/StoryStarter.vue';
 import StoryContinuer from '@/components/StoryContinuer.vue';
 export default {
@@ -32,10 +30,11 @@ export default {
     StoryStarter,
     StoryContinuer,
   },
-  methods: {
-    async submit() {
-      await axios.get("/api/story/", {});
-    },
-  }
 }
 </script>
+
+<style scoped>
+* {
+  padding: 15px;
+}
+</style>

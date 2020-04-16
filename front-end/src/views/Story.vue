@@ -60,3 +60,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+* {
+  text-align: center;
+  padding: 5px;
+}
+
+img {
+  width: 200px;
+}
+</style>

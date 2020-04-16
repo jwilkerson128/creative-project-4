@@ -1,6 +1,6 @@
 <template>
 <form class="pure-form" @submit.prevent="upload">
-  <legend>Choose a title and illustration.</legend>
+  <h3>Choose a title and illustration and write your name.</h3>
   <fieldset>
     <input v-model="title" placeholder="Title">
   </fieldset>
@@ -11,14 +11,14 @@
     <div class="imageInput" @click="chooseImage">
       <img v-if="url" :src="url" />
       <div v-if="!url" class="placeholder">
-        Choose an Illustration
+        Upload an Illustration
       </div>
       <input class="fileInput" ref="fileInput" type="file" @input="fileChanged">
     </div>
     <p v-if="error" class="error">{{error}}</p>
   </fieldset>
   <fieldset class="buttons">
-    <button type="submit" class="pure-button pure-button-primary right">Create Story</button>
+    <button type="submit">Create Story</button>
   </fieldset>
 </form>
 </template>
@@ -45,18 +45,20 @@ export default {
       this.$refs.fileInput.click()
     },
     async upload() {
-      try {
-        const formData = new FormData();
-        formData.append('photo', this.file, this.file.name);
-        formData.append('title', this.title);
-        formData.append('name', this.name);
-        await axios.post("/api/story", formData);
-        this.file = null;
-        this.url = "";
-        this.title = "";
-        this.name = "";
-      } catch (error) {
-        this.error = "Error: " + error.response.data.message;
+      if (this.file != null && this.title != '' && this.name != '') {
+        try {
+          const formData = new FormData();
+          formData.append('photo', this.file, this.file.name);
+          formData.append('title', this.title);
+          formData.append('name', this.name);
+          await axios.post("/api/story", formData);
+          this.file = null;
+          this.url = "";
+          this.title = "";
+          this.name = "";
+        } catch (error) {
+          this.error = "Error: " + error.response.data.message;
+        }
       }
     }
   }
@@ -64,60 +66,16 @@ export default {
 </script>
 
 <style scoped>
-/* Modals */
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .3);
-  transition: opacity 0.5s ease;
-  display: flex;
-  transition: background 0.2s ease-in-out, height 1s ease-in-out;
-  transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
-  justify-content: center;
-  transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
-}
-
-.modal-container {
-  width: 50%;
-  height: max-content;
-  margin-top: 80px;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all 0.5s ease;
-}
-
-/*
-* The following styles are auto-applied to elements with
-* transition="modal" when their visibility is toggled
-* by Vue.js.
-*
-* You can easily play with the modal transition by editing
-* these styles.
-*/
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+* {
+  background-color: #02C8A7;
 }
 
 /* Form */
 
 form {
   font-size: 11pt;
+  width: 100%;
+  margin: auto;
 }
 
 input {
@@ -156,5 +114,17 @@ img {
 .buttons {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+}
+
+button {
+  background-color: #E0E0E0;
+}
+
+/*Desktop*/
+@media only screen and (min-width: 961px) {
+  form {
+    width: 50%;
+  }
 }
 </style>

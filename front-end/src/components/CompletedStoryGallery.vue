@@ -38,10 +38,21 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 img {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
+}
+
+.story-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.story {
+  margin: 10px;
 }
 </style>
