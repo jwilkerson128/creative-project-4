@@ -67,6 +67,10 @@ export default {
   padding: 5px;
 }
 
+ol {
+  list-style-type: none;
+}
+
 img {
   width: 200px;
 }
